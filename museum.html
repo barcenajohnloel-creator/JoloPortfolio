@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Jolo Photography</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<div class="fixed inset-0 z-[1] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+
+<body id="page-body" class="bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white font-sans selection:bg-purple-500 selection:text-white pb-0 transition-colors duration-300 overflow-hidden flex flex-col h-screen">
+
+     <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-60 dark:opacity-40 saturate-boost">
+            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-green-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-32 left-20 w-96 h-96 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div class="absolute top-[40%] right-[30%] w-80 h-80 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-6000"></div>
+        </div>
+        <div class="absolute inset-0 z-[1] opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+    </div>
+
+    <header class="sticky top-4 z-[100] w-full px-4 flex justify-center mb-0">
+         <nav class="pointer-events-auto bg-white/70 dark:bg-black/40 backdrop-blur-xl border-none rounded-full px-6 py-3 shadow-2xl shadow-purple-500/10 flex items-center justify-between w-full max-w-5xl transition-all duration-300">
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-orange-500 flex items-center justify-center text-white font-bold text-xs group-hover:rotate-12 transition-transform">JB</div>
+            <span class="font-bold text-lg text-slate-900 dark:text-white tracking-tight hidden sm:block">Jolo</span>
+        </a>
+        <div class="hidden md:flex items-center gap-1 bg-slate-100/50 dark:bg-white/5 p-1.5 rounded-full border-none">
+            <a href="about.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">About</a>
+            <a href="work.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">Work</a>
+            <a href="museum.html" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white dark:bg-white text-slate-900 dark:text-black shadow-lg scale-105 transition-all duration-300">Gallery</a>
+            <a href="contact.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">Contact</a>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <div class="md:hidden relative">
+                <button id="mobile-menu-btn" class="p-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black transition-colors shadow-lg"><i data-lucide="menu" class="w-5 h-5"></i></button>
+                <div id="mobile-menu" class="hidden absolute right-0 top-full mt-4 w-56 bg-white dark:bg-[#0f172a] rounded-2xl p-2 shadow-2xl flex flex-col gap-1 border-none animate-fade-in origin-top-right">
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                    <a href="about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="user" class="w-4 h-4"></i> About</a>
+                    <a href="work.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="image" class="w-4 h-4"></i> Work</a>
+                    <a href="museum.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white font-bold"><i data-lucide="gallery-horizontal" class="w-4 h-4"></i> Gallery</a>
+                    <a href="contact.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-bold"><i data-lucide="mail" class="w-4 h-4"></i> Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </header>
+
+    <!-- Main Content: Removed pt-20, using flex to center content -->
+    <main class="relative z-10 w-full h-full flex-1 animate-fade-in flex items-center justify-center">
+        <!-- Scroll Container: Reduced gap from 20 to 10 for better spacing -->
+        <div id="museum-scroll-container" class="flex items-center gap-10 overflow-x-auto hide-scrollbar px-10 md:px-20 pb-12 w-full h-[70vh]">
+            
+            <!-- Intro -->
+            <div class="min-w-[300px] text-center shrink-0">
+                <h1 class="text-5xl md:text-7xl font-serif italic text-slate-900 dark:text-white mb-4">The Exhibition</h1>
+                <p class="text-slate-500 dark:text-slate-400 text-sm tracking-widest uppercase font-bold">Curated Collection 2025</p>
+                <div class="flex items-center justify-center gap-2 mt-8 text-slate-400 animate-pulse">
+                    <span class="text-xs uppercase tracking-widest">Scroll</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </div>
+            </div>
+
+            <!-- Frames -->
+            <div class="group relative shrink-0 perspective-1000">
+                <div class="relative p-8 bg-white dark:bg-[#1a1a1a] shadow-2xl border-[12px] border-slate-900 dark:border-[#333] transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:scale-105">
+                    <img src="photo 1.jpg" class="h-[40vh] md:h-[50vh] w-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Art">
+                    <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.5)] pointer-events-none"></div>
+                </div>
+                <div class="mt-8 text-center opacity-60 group-hover:opacity-100 transition-opacity">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white font-serif">Urban Solitude</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">Digital, 2024</p>
+                </div>
+                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+            </div>
+
+            <div class="group relative shrink-0 perspective-1000">
+                <div class="relative p-8 bg-white dark:bg-[#1a1a1a] shadow-2xl border-[12px] border-slate-900 dark:border-[#333] transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:scale-105">
+                    <img src="photo 2.jpg" class="h-[40vh] md:h-[50vh] w-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Art">
+                    <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.5)] pointer-events-none"></div>
+                </div>
+                <div class="mt-8 text-center opacity-60 group-hover:opacity-100 transition-opacity">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white font-serif">Night Lights</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">35mm Film, 2023</p>
+                </div>
+                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+            </div>
+
+            <div class="group relative shrink-0 perspective-1000">
+                <div class="relative p-8 bg-white dark:bg-[#1a1a1a] shadow-2xl border-[12px] border-slate-900 dark:border-[#333] transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:scale-105">
+                    <img src="photo 3.jpg" class="h-[40vh] md:h-[50vh] w-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Art">
+                    <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.5)] pointer-events-none"></div>
+                </div>
+                <div class="mt-8 text-center opacity-60 group-hover:opacity-100 transition-opacity">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white font-serif">Neon Rain</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">Digital, 2024</p>
+                </div>
+                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+            </div>
+
+             <div class="group relative shrink-0 perspective-1000">
+                <div class="relative p-8 bg-white dark:bg-[#1a1a1a] shadow-2xl border-[12px] border-slate-900 dark:border-[#333] transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:scale-105">
+                    <img src="photo 4.jpg" class="h-[40vh] md:h-[50vh] w-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Art">
+                    <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.5)] pointer-events-none"></div>
+                </div>
+                <div class="mt-8 text-center opacity-60 group-hover:opacity-100 transition-opacity">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white font-serif">Street Life</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">Digital, 2025</p>
+                </div>
+                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+            </div>
+
+            <div class="min-w-[200px] text-center opacity-30 shrink-0">
+                <p class="text-xs uppercase tracking-widest">End of Exhibition</p>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="relative z-10 py-8 text-left px-8 text-sm text-slate-500 dark:text-slate-400 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <p>© 2025 Jolo Photography. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

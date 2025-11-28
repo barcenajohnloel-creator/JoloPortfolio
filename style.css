@@ -1,0 +1,170 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f2f2f7;
+  color: #1d1d1f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fix: ensure the floating header/nav stays centered (override any float/transform rules that forced it to the right) */
+header {
+	/* ensure header spans full width and centers children */
+	left: 0 !important;
+	right: 0 !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	position: fixed; /* keep same stacking/positioning as intended */
+	z-index: 50;
+}
+
+/* target the nav inside header */
+header > nav,
+header nav {
+	float: none !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	margin: 0 auto !important;
+	position: relative !important;
+	left: 0 !important;
+	right: 0 !important;
+	top: auto !important;
+	transform: none !important;
+	width: 100%;
+	max-width: 64rem; /* matches max-w-5xl */
+	box-sizing: border-box !important;
+}
+
+/* small-screen safe: keep nav content centered when container is narrow */
+@media (max-width: 767px) {
+	header > nav,
+	header nav {
+		padding-left: 1rem !important;
+		padding-right: 1rem !important;
+	}
+}
+
+/* Ensure mobile menu absolute positioning is anchored to nav (not page) */
+#mobile-menu {
+	right: 0 !important;
+	top: auto !important;
+}
+
+/* Carousel / marquee hover effects */
+.marquee-container { /* keep pointer for hover interactions */
+  cursor: pointer;
+}
+
+/* Smooth transitions for images */
+.marquee-content img {
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), filter .25s ease, box-shadow .25s ease;
+  will-change: transform, filter;
+  transform-origin: center center;
+  /* make sure images are rendered crisply during transform */
+  backface-visibility: hidden;
+}
+
+/* Scale + boost on individual image hover */
+.marquee-content img:hover,
+.marquee-content img:focus {
+  transform: scale(1.06);
+  filter: saturate(1.15) contrast(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  z-index: 10;
+}
+
+/* Pause marquee animation when user hovers the container */
+.marquee-container:hover .marquee-content,
+.marquee-container:focus-within .marquee-content {
+  animation-play-state: paused !important;
+}
+
+/* On touch devices, allow tapping to pause (toggle via active state) */
+.marquee-container:active .marquee-content {
+  animation-play-state: paused !important;
+}
+
+/* Optional: subtle tilt on hover for a more dynamic feel */
+.marquee-content img:hover {
+  transform: scale(1.06) rotate(-0.6deg);
+}
+
+/* Auto-carousel (infinite horizontal scroll using duplicated content) */
+.auto-scroll-container { overflow: hidden; position: relative; }
+.auto-scroll {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  white-space: nowrap;
+  /* duration tuned by JS (variable) */
+  --scroll-duration: 30s;
+  animation: scroll-left var(--scroll-duration) linear infinite;
+  will-change: transform;
+  /* keep images from wrapping */
+  flex-wrap: nowrap;
+}
+.auto-scroll img {
+  flex: 0 0 auto;
+  display: block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), filter .25s ease, box-shadow .25s ease;
+}
+
+/* hover effects: pause animation and scale image */
+.auto-scroll-container:hover .auto-scroll,
+.auto-scroll-container:focus-within .auto-scroll {
+  animation-play-state: paused !important;
+  cursor: grab;
+}
+.auto-scroll img:hover,
+.auto-scroll img:focus {
+  transform: scale(1.06) rotate(-0.6deg);
+  filter: saturate(1.15) contrast(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  z-index: 10;
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .auto-scroll { animation: none !important; }
+  .auto-scroll img { transition: none !important; }
+}
+
+/* responsive: keep items visible and comfortable spacing */
+.auto-scroll img {
+  min-width: 160px; /* ensures reasonable width on small screens */
+}
+@media (min-width: 768px) {
+  .auto-scroll img { min-width: 260px; }
+}
+
+/* utility: smooth reflow when JS updates duration */
+.auto-scroll[style] { transition: none; }

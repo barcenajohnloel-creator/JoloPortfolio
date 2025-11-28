@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolo Photography</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+     <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-60 dark:opacity-40 saturate-boost">
+            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-green-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-32 left-20 w-96 h-96 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div class="absolute top-[40%] right-[30%] w-80 h-80 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-6000"></div>
+        </div>
+        <div class="absolute inset-0 z-[1] opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+    </div>
+    
+    <style>
+        /* New Gradient Classes - Gold/Amber & Deep Blue/Indigo */
+        .card-gradient-gold {
+            background-image: linear-gradient(135deg, #ffffff, #ffffff); /* Light Gold to Yellow Gold */
+        }
+        .dark .card-gradient-gold {
+            background-image: linear-gradient(135deg, #713e00, #b8860b); /* Darker Gold for dark mode */
+        }
+
+        .card-gradient-indigo {
+            background-image: linear-gradient(135deg, #6366f1, #4f46e5); /* Indigo */
+        }
+        .dark .card-gradient-indigo {
+            background-image: linear-gradient(135deg, #3730a3, #4338ca); /* Darker Indigo for dark mode */
+        }
+
+        .card-gradient-deep-blue-pink {
+            background: linear-gradient(to top right, rgba(236, 72, 153, 0.2), rgba(37, 99, 235, 0.2));
+        }
+        .dark .card-gradient-deep-blue-pink {
+            background: linear-gradient(to top right, rgba(236, 72, 153, 0.4), rgba(37, 99, 235, 0.4));
+        }
+        
+        /* Ensure the footer background stays consistent with the site's dark background blend */
+        .purple-gradient-section {
+            background-image: linear-gradient(to top, #020617 5%, #0f172a 100%);
+        }
+        
+        /* FIX: Define the missing keyframes for auto-scroll */
+        .auto-scroll {
+            display: flex;
+            gap: 1.5rem;
+            width: fit-content;
+            animation: scroll-x var(--scroll-duration, 30s) linear infinite;
+        }
+
+        @keyframes scroll-x {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                /* translateX by half the total width (the original content width) */
+                transform: translateX(-50%); 
+            }
+        }
+
+        /* Styles for the dynamic background */
+        #dynamic-bg {
+            /* Initial state defined in HTML: translate-y-full opacity-0 */
+            transition: transform 1s ease-out, opacity 1s ease-out, background-color 0.8s;
+        }
+
+        #dynamic-bg.is-active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Example dynamic background color/gradient (change as needed) */
+        .light #dynamic-bg {
+            background: linear-gradient(to top, #f0f4f8, #eef1f6);
+        }
+        .dark #dynamic-bg {
+            background: linear-gradient(to bottom, #10162a, #0d0f1b);
+        }
+
+    </style>
+</head>
+<body id="page-body" class="bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white font-sans selection:bg-blue-500 selection:text-white pb-0 transition-colors duration-300 overflow-x-hidden">
+
+    <div class="fixed inset-0 z-[1] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+    <div id="dynamic-bg" class="fixed inset-0 z-0 pointer-events-none translate-y-full opacity-0 transition-transform duration-100 ease-out" aria-hidden="true"></div>
+
+    <div class="intro-text-container w-full h-screen flex flex-col items-center justify-center relative z-10 bg-transparent">
+        <h1 class="intro-title text-[15vw] md:text-[18vw] tracking-tighter text-center leading-none text-slate-900 dark:text-white">
+            <span class="fluid-text">JOLO</span><br>
+            <span class="text-[4vw] tracking-[0.6em] block mt-2 font-bold text-slate-400 dark:text-gray-500">PHOTOGRAPHY</span>
+        </h1>
+        
+        <div class="absolute bottom-10 animate-bounce-slow flex flex-col items-center gap-2" aria-hidden="true">
+            <span class="text-slate-500 dark:text-gray-500 text-xs font-bold uppercase tracking-widest">Scroll Down</span>
+            <i data-lucide="arrow-down" class="w-8 h-8 text-slate-500 dark:text-gray-400"></i>
+        </div>
+    </div>
+
+    <div class="bento-container relative z-20 w-full mt-[30vh]" id="main-content">
+        
+        <header class="sticky top-4 z-[100] w-full px-4 flex justify-center mb-10">
+             <nav class="pointer-events-auto bg-white/70 dark:bg-black/40 backdrop-blur-xl border-none rounded-full px-6 py-3 shadow-2xl shadow-purple-500/10 flex items-center justify-between w-full max-w-5xl transition-all duration-300">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-orange-500 flex items-center justify-center text-white font-bold text-xs group-hover:rotate-12 transition-transform">JB</div>
+                <span class="font-bold text-lg text-slate-900 dark:text-white tracking-tight hidden sm:block">Jolo</span>
+            </a>
+            <div class="hidden md:flex items-center gap-1 bg-slate-100/50 dark:bg-white/5 p-1.5 rounded-full border-none">
+                <a href="about.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">About</a>
+                <a href="work.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">Work</a>
+                <a href="museum.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">Gallery</a>
+                <a href="contact.html" class="px-6 py-2.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300">Contact</a>
+            </div>
+            <div class="flex items-center gap-3">
+                
+                <div class="md:hidden relative">
+                    <button id="mobile-menu-btn" class="p-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black transition-colors shadow-lg"><i data-lucide="menu" class="w-5 h-5"></i></button>
+                    <div id="mobile-menu" class="hidden absolute right-0 top-full mt-4 w-56 bg-white dark:bg-[#0f172a] rounded-2xl p-2 shadow-2xl flex flex-col gap-1 border-none animate-fade-in origin-top-right">
+                        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                        <a href="about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="user" class="w-4 h-4"></i> About</a>
+                        <a href="work.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="image" class="w-4 h-4"></i> Work</a>
+                        <a href="museum.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 font-medium"><i data-lucide="gallery-horizontal" class="w-4 h-4"></i> Gallery</a>
+                        <a href="contact.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-bold"><i data-lucide="mail" class="w-4 h-4"></i> Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        </header>
+
+        <main class="w-full max-w-5xl mx-auto p-4 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                
+                <!-- Main Feature -->
+            <div class="glass-card md:col-span-2 md:row-span-2 relative overflow-hidden rounded-[2rem] p-0 group transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20">
+                <img src="Bentobgg.jpg" alt="Featured" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-150">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8 w-full">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border-none text-xs font-bold uppercase tracking-widest text-white mb-4">Jolo Photography</span>
+                    <h2 class="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter">2025</h2>
+                </div>
+                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border-none group-hover:rotate-45 transition-transform duration-300">
+                    <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+                </div>
+            </div>
+<div class="relative overflow-hidden rounded-[2rem] p-6 md:col-span-2 bg-gradient-to-br from-emerald-500 to-teal-700 dark:from-emerald-600 dark:to-teal-900 text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                <div class="flex flex-col h-full justify-between relative z-10">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-emerald-100 text-xs font-bold uppercase tracking-widest">Current Status</span>
+                            <h3 class="text-3xl font-extrabold mt-1">Open to Work</h3>
+                        </div>
+                        <span class="flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-8 bg-white/20 rounded-full flex items-center p-1">
+                            <div class="w-6 h-6 bg-white rounded-full shadow-sm ml-auto"></div>
+                        </div>
+                        <span class="font-bold text-sm text-emerald-100">AVAILABLE FOR BOOKING</span>
+                    </div>
+                </div>
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+            </div>
+
+                <div class="glass-card relative overflow-hidden rounded-[2rem] p-0 group transition-all duration-300 hover:scale-[1.02]">
+                <img src="map.jpg" alt="Map" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity  group-hover:grayscale-0 saturate-150">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 text-white">
+                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mb-3 shadow-lg shadow-red-500/30">
+                        <i data-lucide="map-pin" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <h3 class="font-bold text-xl leading-tight">Based in<br>Manila, PH</h3>
+                </div>
+            </div>
+
+                <div class="relative overflow-hidden rounded-[2rem] p-6 md:row-span-2 bg-gradient-to-b from-blue-600 to-indigo-700 dark:from-blue-600 dark:to-indigo-800 text-white flex flex-col transition-all duration-300 hover:shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-extrabold text-lg">Services</h3>
+                    <i data-lucide="arrow-up-right" class="w-5 h-5 text-blue-200"></i>
+                </div>
+                <div class="flex flex-col gap-3 flex-grow">
+                    <a href="work.html" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border-none backdrop-blur-sm group/item">
+                        <span class="font-bold text-sm">Street</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-50 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all"></i>
+                    </a>
+                    <a href="work.html" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border-none backdrop-blur-sm group/item">
+                        <span class="font-bold text-sm">Editorial</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-50 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all"></i>
+                    </a>
+                    <a href="work.html" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border-none backdrop-blur-sm group/item">
+                        <span class="font-bold text-sm">Portrait</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-50 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all"></i>
+                    </a>
+                    <a href="work.html" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border-none backdrop-blur-sm group/item">
+                        <span class="font-bold text-sm">Events</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-50 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all"></i>
+                    </a>
+                </div>
+            </div>
+
+                <div class="relative overflow-hidden rounded-[2rem] p-6 flex flex-col justify-center bg-gradient-to-br from-purple-500/10 to-pink-500/10 dark:from-purple-900/20 dark:to-pink-900/20 backdrop-blur-md">
+                <h3 class="font-extrabold text-sm text-slate-500 dark:text-slate-400 mb-4 uppercase tracking-wider">Essentials</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 group/tech">
+                        <div class="w-10 h-10 bg-slate-200 dark:bg-white/10 rounded-xl flex items-center justify-center text-slate-800 dark:text-white transition-colors group-hover/tech:bg-purple-500 group-hover/tech:text-white">
+                            <i data-lucide="camera" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 dark:text-slate-200">Fujifilm</span>
+                    </div>
+                    <div class="flex items-center gap-4 group/tech">
+                        <div class="w-10 h-10 bg-slate-200 dark:bg-white/10 rounded-xl flex items-center justify-center text-slate-800 dark:text-white transition-colors group-hover/tech:bg-pink-500 group-hover/tech:text-white">
+                            <i data-lucide="laptop" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 dark:text-slate-200">Macbook</span>
+                    </div>
+                </div>
+            </div>
+
+                <div class="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-tr from-orange-500 to-pink-600 dark:from-orange-600 dark:to-pink-700 text-white transition-all duration-300 hover:scale-[1.02]">
+                <div class="flex justify-between items-start h-full flex-col">
+                    <div class="flex justify-between w-full">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </div>
+                        <a href="https://instagram.com/_jolo3" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-white text-pink-600 flex items-center justify-center hover:scale-110 transition-transform">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold">@_jolo3</h3>
+                        <p class="text-xs text-white/80 mt-1 font-bold">Follow for visuals.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div class="glass-card bg-indigo-600 text-white border-none flex flex-col justify-between shadow-lg shadow-indigo-500/20 rounded-[2rem] p-6">
+    <i data-lucide="quote" class="w-8 h-8 opacity-50 fill-white" aria-hidden="true"></i>
+    <blockquote class="font-bold text-sm leading-tight m-0">"Jolo has an incredible eye for finding beauty in the chaos of the city."</blockquote>
+    <div>
+        <div class="font-black text-xs uppercase tracking-wider">Lorenz Supnet</div>
+        <div class="text-[10px] opacity-80 font-bold">Film Director</div>
+    </div>
+</div>
+                </div>
+
+            </div>
+        </main>
+
+       
+         <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12 relative">
+        
+    </div>
+    
+    <div class="w-full overflow-hidden relative glass-card p-0 !bg-white/40 dark:!bg-white/5 !rounded-[3rem] mt-16 shadow-xl !border-slate-200"
+         style="border: 4px solid black;">
+        <div class="auto-scroll-container" aria-hidden="false"> 
+            <div class="auto-scroll" role="list" aria-label="Auto-scrolling gallery">
+                <img src="photo 1.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 2.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 3.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 4.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="Photo 5.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo8.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 1.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 2.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 3.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo 4.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="Photo 5.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+                <img src="photo8.jpg" alt="Street photography sample" class="w-64 h-64 md:h-80 object-cover rounded-3xl  transition-all duration-500 shadow-md hover:shadow-xl hover:scale-105" role="listitem">
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div class="mt-20 pb-4 text-slate-500 dark:text-gray-400 text-">
+                   <div style="text-align: center; color: #000000; max-width: 600px; margin: 0 auto;">
+    <div style="margin-bottom: 1rem;">
+        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; color: #000000;">Let's create together</h3>
+        <p style="font-size: 0.875rem; font-weight: 500; opacity: 0.7; margin-bottom: 0.5rem; color: #000000;">Based in Manila, Philippines</p>
+        <p style="font-size: 0.75rem; opacity: 0.5; color: #000000;">© 2025 Jolo Photography. All rights reserved.</p>
+    </div>
+    <div style="display: flex; gap: 1.5rem; margin-top: 1rem; padding-bottom: 1rem; justify-content: center;">
+        <a href="https://instagram.com/_jolo3" target="_blank" style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; color: #000000;">Instagram</a>
+        <a href="mailto:barcenajolo03@gmail.com" style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; color: #000000;">Email</a>
+    </div>
+</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+(function () {
+  const speedPxPerSec = 120; // feel free to tweak (higher = faster)
+  const debounce = (fn, wait=150) => {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+  };
+  
+  // Dynamic Background Logic
+  const dynamicBg = document.getElementById('dynamic-bg');
+  const mainContent = document.getElementById('main-content'); // Scroll point reference
+
+  function handleScroll() {
+    // Activate the dynamic background when the main content section comes into view
+    // Or simply check if the user has scrolled a certain distance (e.g., 80% of viewport height)
+    if (window.scrollY > window.innerHeight * 0.8) {
+        dynamicBg.classList.add('is-active');
+    } else {
+        dynamicBg.classList.remove('is-active');
+    }
+  }
+
+  function initCarousel(el) {
+    if (!el) return;
+    // If not duplicated yet, duplicate content for seamless loop
+    if (!el.dataset.looped) {
+      el.innerHTML = el.innerHTML + el.innerHTML;
+      el.dataset.looped = 'true';
+    }
+    // compute half width (single pass distance)
+    // first force layout then compute
+    requestAnimationFrame(() => {
+      const totalWidth = el.scrollWidth / 2;
+      // duration in seconds = px / pxPerSec
+      const duration = Math.max(18, Math.round(totalWidth / speedPxPerSec)); // min duration
+      el.style.setProperty('--scroll-duration', duration + 's');
+    });
+  }
+
+  function setupAll() {
+    const carousels = document.querySelectorAll('.auto-scroll');
+    carousels.forEach(initCarousel);
+    // FIX: Initialize Lucide icons after DOM manipulation is done
+    lucide.createIcons(); 
+    // Initial scroll check
+    handleScroll();
+  }
+
+  // initialize
+  setupAll();
+
+  // Event Listeners
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', debounce(setupAll, 120));
+
+  // pause on touch while interacting (mobile)
+  document.querySelectorAll('.auto-scroll-container').forEach(container => {
+    let isDown = false, startX=0, scrollLeft=0;
+    const scroller = container.querySelector('.auto-scroll');
+    container.addEventListener('pointerdown', (e) => {
+      isDown = true;
+      container.classList.add('is-dragging');
+      // pause animation while dragging
+      if (scroller) scroller.style.animationPlayState = 'paused';
+    });
+    container.addEventListener('pointerup', () => {
+      isDown = false;
+      container.classList.remove('is-dragging');
+      if (scroller) scroller.style.animationPlayState = ''; // resume (CSS will handle)
+    });
+    container.addEventListener('pointercancel', () => {
+      isDown = false;
+      container.classList.remove('is-dragging');
+      if (scroller) scroller.style.animationPlayState = '';
+    });
+  });
+
+  // respect reduced-motion: stop animations entirely if user prefers
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.auto-scroll').forEach(el => el.style.animation = 'none');
+  }
+
+})();
+</script>
+</body>
+</html>
